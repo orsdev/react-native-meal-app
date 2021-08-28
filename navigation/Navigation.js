@@ -8,13 +8,21 @@ import CategoriesScreen from '../screens/Categories';
 import CategoriesMealScreen from '../screens/CategoriesMeal';
 import MealDetailScreen from '../screens/MealDetail';
 
-
 const Stack = createNativeStackNavigator();
 
 function MealsNavigation() {
    return (
       <NavigationContainer>
-         <Stack.Navigator>
+         <Stack.Navigator
+            screenOptions={{
+               headerStyle: {
+                  backgroundColor: Colors.primary,
+               },
+               headerTintColor: Colors.text,
+               headerTitleStyle: {
+                  fontWeight: 'bold',
+               },
+            }}>
             <Stack.Screen
                name="Categories"
                component={CategoriesScreen}
@@ -23,12 +31,9 @@ function MealsNavigation() {
                name="Meals"
                component={CategoriesMealScreen}
                options={{
-                  title: 'Meal Categories',
-                  headerStyle: {
-                     backgroundColor: Colors.primary,
-                  },
-                  headerTintColor: Colors.text,
-               }} />
+                  title: 'Meals'
+               }}
+            />
             <Stack.Screen name="Details" component={MealDetailScreen} />
          </Stack.Navigator>
       </NavigationContainer>
