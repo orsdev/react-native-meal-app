@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, FlatList, ImageBackground } from 'react-native';
 
-const MealItem = ({ item }) => {
+const MealItem = ({ item, onSelectMeal }) => {
    return (
       <View style={styles.container}>
-         <TouchableOpacity>
+         <TouchableOpacity onPress={onSelectMeal}>
             <View>
                <View style={{ ...styles.row, ...styles.header }}>
                   <ImageBackground source={{ uri: item.imageUrl }} style={styles.bg} >
