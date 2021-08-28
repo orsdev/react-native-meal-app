@@ -10,7 +10,9 @@ const CategoriesMeal = ({ route, navigation }) => {
    const displayMeal = MEALS.filter((mls) => mls.categoryIds.indexOf(categoryId) >= 0);
 
    const renderItems = ({ item }) => {
-      return <MealItem item={item} />
+      return <MealItem item={item} onSelectMeal={() => navigation.navigate('Details', {
+         mealId: item.id
+      })} />
    }
 
    React.useEffect(() => {
