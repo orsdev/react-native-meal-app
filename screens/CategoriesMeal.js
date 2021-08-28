@@ -1,11 +1,17 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text, Button, FlatList } from 'react-native';
+import MealItem from '../components/MealItem';
 
-import { CATEGORIES } from '../data/dummy-data';
+import { CATEGORIES, MEALS } from '../data/dummy-data';
 
 const CategoriesMeal = ({ route, navigation }) => {
    const { categoryId } = route.params;
    const findCategoryById = CATEGORIES.find(({ id }) => categoryId === id);
+   const displayMeal = MEALS.filter((mls) => mls.categoryIds.indexOf(categoryId) >= 0);
+
+   const renderItems = ({ item }) => {
+      return <MealItem item={item} />
+   }
 
    React.useEffect(() => {
       if (findCategoryById) {
@@ -27,11 +33,14 @@ const CategoriesMeal = ({ route, navigation }) => {
 
    return (
       <View style={styles.container}>
-         <Text style={styles.title}> Categories Meal Screen</Text>
-         <Text style={styles.title}>{findCategoryById.title}</Text>
-         <Button
-            title="Go to details"
-            onPress={() => navigation.navigate('Details')} />
+         <FlatList
+            data={displayMeal}
+            keyExtractor={(item) => item.id}
+            renderItem={renderItems}
+            style={{
+               width: '100%'
+            }}
+         />
       </View>
    )
 }
