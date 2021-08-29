@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button, FlatList } from 'react-native';
+import CustomHeader from '../components/CustomHeader';
 import MealItem from '../components/MealItem';
 
 import { CATEGORIES, MEALS } from '../data/dummy-data';
@@ -15,9 +16,12 @@ const CategoriesMeal = ({ route, navigation }) => {
       })} />
    }
 
-   React.useEffect(() => {
+   React.useLayoutEffect(() => {
       if (findCategoryById) {
-         navigation.setOptions({ title: findCategoryById.title });
+         navigation.setOptions({
+            title: findCategoryById.title,
+            headerRight: CustomHeader
+         });
       }
    }, [findCategoryById]);
 
