@@ -1,7 +1,8 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button, FlatList } from 'react-native';
+import { View, StyleSheet, Text, Button } from 'react-native';
 import CustomHeader from '../components/CustomHeader';
 import MealItem from '../components/MealItem';
+import MealList from '../components/MealList';
 
 import { CATEGORIES, MEALS } from '../data/dummy-data';
 
@@ -39,14 +40,9 @@ const CategoriesMeal = ({ route, navigation }) => {
 
    return (
       <View style={styles.container}>
-         <FlatList
-            data={displayMeal}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItems}
-            style={{
-               width: '100%'
-            }}
-         />
+         <MealList
+            displayMeal={displayMeal}
+            renderItems={renderItems} />
       </View>
    )
 }
