@@ -109,7 +109,4 @@ function MealNavigation() {
    );
 }
 
-
-
-
 export default MealNavigation;
