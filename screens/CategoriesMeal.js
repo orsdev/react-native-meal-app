@@ -1,5 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
+import {
+   Item
+} from 'react-navigation-header-buttons';
+
 import CustomHeader from '../components/CustomHeader';
 import MealList from '../components/MealList';
 
@@ -15,7 +19,12 @@ const CategoriesMeal = ({ route, navigation }) => {
          navigation.setOptions({
             title: findCategoryById.title,
             headerRight: () => (
-               <CustomHeader navigation={navigation} />
+               <CustomHeader navigation={navigation} >
+                  <Item
+                     title="Favorite"
+                     iconName="star-outline"
+                     onPress={() => navigation.navigate('Favorite')} />
+               </CustomHeader>
             ),
          });
       }
