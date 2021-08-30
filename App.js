@@ -1,6 +1,9 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
+import { Provider } from 'react-redux';
+
+import { store } from './redux/store';
 
 import MealsNavigation from './navigation/Navigation';
 
@@ -16,7 +19,11 @@ export default function App() {
     return <AppLoading />;
   }
 
-  return <MealsNavigation />
+  return (
+    <Provider store={store}>
+      <MealsNavigation />
+    </Provider>
+  )
 
 }
 

@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, StyleSheet, ScrollView, Text, Button, Image } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+   Item
+} from 'react-navigation-header-buttons';
 
-
+import CustomHeader from '../components/CustomHeader';
 import DefaultText from '../components/DefaultText';
+import { toggleFavorite } from '../redux/actions/meals.action';
 
-import { MEALS } from '../data/dummy-data';
 
 const ListItem = props => {
    return (
@@ -17,8 +21,25 @@ const ListItem = props => {
 
 const MealDetails = ({ route, navigation }) => {
    const { mealId } = route.params;
-   const findMealById = MEALS.find(({ id }) => mealId === id);
+   const availableMeals = useSelector(state => state.meals.meals);
+   const dispatch = useDispatch();
 
+   const findMealById = availableMeals.find(({ id }) => mealId === id);
+
+   React.useEffect(() => {
+      if (findMealById) {
+         navigation.setOptions({
+            headerRight: () => (
+               <CustomHeader navigation={navigation} >
+                  <Item
+                     title="Favorite"
+                     iconName="star-outline"
+                     onPress={() => dispatch(toggleFavorite(mealId))} />
+               </CustomHeader>
+            ),
+         });
+      }
+   }, [findMealById]);
 
    React.useEffect(() => {
       if (findMealById) {

@@ -1,34 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
-import {
-   Item
-} from 'react-navigation-header-buttons';
+import { useSelector } from 'react-redux';
 
-import CustomHeader from '../components/CustomHeader';
 import MealList from '../components/MealList';
 
-import { CATEGORIES, MEALS } from '../data/dummy-data';
+import { CATEGORIES } from '../data/dummy-data';
 
 const CategoriesMeal = ({ route, navigation }) => {
    const { categoryId } = route.params;
-   const findCategoryById = CATEGORIES.find(({ id }) => categoryId === id);
-   const displayMeal = MEALS.filter((mls) => mls.categoryIds.indexOf(categoryId) >= 0);
 
-   React.useLayoutEffect(() => {
-      if (findCategoryById) {
-         navigation.setOptions({
-            title: findCategoryById.title,
-            headerRight: () => (
-               <CustomHeader navigation={navigation} >
-                  <Item
-                     title="Favorite"
-                     iconName="star-outline"
-                     onPress={() => navigation.navigate('Favorite')} />
-               </CustomHeader>
-            ),
-         });
-      }
-   }, [findCategoryById]);
+   const availableMeals = useSelector(state => state.meals.filteredMeals);
+
+   const findCategoryById = CATEGORIES.find(({ id }) => categoryId === id);
+   const displayMeal = availableMeals.filter((mls) => mls.categoryIds.indexOf(categoryId) >= 0);
 
 
    if (!findCategoryById) {
