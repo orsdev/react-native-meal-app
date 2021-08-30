@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
 import CustomHeader from '../components/CustomHeader';
-import MealItem from '../components/MealItem';
 import MealList from '../components/MealList';
 
 import { CATEGORIES, MEALS } from '../data/dummy-data';
@@ -10,12 +9,6 @@ const CategoriesMeal = ({ route, navigation }) => {
    const { categoryId } = route.params;
    const findCategoryById = CATEGORIES.find(({ id }) => categoryId === id);
    const displayMeal = MEALS.filter((mls) => mls.categoryIds.indexOf(categoryId) >= 0);
-
-   const renderItems = ({ item }) => {
-      return <MealItem item={item} onSelectMeal={() => navigation.navigate('Details', {
-         mealId: item.id
-      })} />
-   }
 
    React.useLayoutEffect(() => {
       if (findCategoryById) {
@@ -41,8 +34,8 @@ const CategoriesMeal = ({ route, navigation }) => {
    return (
       <View style={styles.container}>
          <MealList
-            displayMeal={displayMeal}
-            renderItems={renderItems} />
+            navigation={navigation}
+            data={displayMeal} />
       </View>
    )
 }
