@@ -2,21 +2,17 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import {
    HeaderButtons,
-   HeaderButton,
-   Item
+   HeaderButton
 } from 'react-navigation-header-buttons';
 
 const IoniconsHeaderButton = (props) => (
    <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 );
 
-const CustomHeader = ({ navigation }) => {
+const CustomHeader = ({ navigation, children }) => {
    return (
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-         <Item
-            title="Favorite"
-            iconName="star-outline"
-            onPress={() => navigation.navigate('Favorite')} />
+         {children}
       </HeaderButtons>
    )
 }
