@@ -1,11 +1,18 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
+import MealItem from './MealItem';
 
-const MealList = ({ displayMeal, renderItems }) => {
+
+const MealList = ({ data, navigation }) => {
+   const renderItems = ({ item }) => {
+      return <MealItem item={item} onSelectMeal={() => navigation.navigate('Details', {
+         mealId: item.id
+      })} />
+   }
    return (
       <View style={styles.container}>
          <FlatList
-            data={displayMeal}
+            data={data}
             keyExtractor={(item) => item.id}
             renderItem={renderItems}
             style={{
