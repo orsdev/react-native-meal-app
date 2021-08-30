@@ -28,7 +28,7 @@ const StackNavigation = () => (
          headerTintColor: Colors.text,
          headerTitleStyle: {
             fontWeight: 'bold',
-         },
+         }
       }}>
       <Stack.Screen
          name="Categories"
@@ -53,7 +53,7 @@ function TabNavigation() {
                height: 60
             }
          })}>
-         {/* <Tab.Screen
+         <Tab.Screen
             name="Home"
             component={StackNavigation}
             options={{
@@ -66,7 +66,7 @@ function TabNavigation() {
                   <Ionicons name="home" size={25} color="black" />
                ),
                headerShown: false,
-            }} /> */}
+            }} />
          <Tab.Screen
             name="Favorite"
             component={FavoriteScreen} options={{
@@ -78,7 +78,7 @@ function TabNavigation() {
                tabBarIcon: () => (
                   <Ionicons name="star-outline" size={25} color="black" />
                ),
-               headerTitle: 'Your Favorite'
+               headerShown: false
             }} />
       </Tab.Navigator>
    );
@@ -87,8 +87,11 @@ function TabNavigation() {
 function DrawerNavigation() {
    return (
       <Drawer.Navigator initialRouteName="Home">
-         <Drawer.Screen name="Home" component={StackNavigation} />
-         <Drawer.Screen name="My Favorite" component={TabNavigation} />
+         <Drawer.Screen name="Drawer Home"
+            component={TabNavigation} options={{
+               headerTitle: '',
+               title: 'Home'
+            }} />
          <Drawer.Screen name="Filter" component={FilterScreen} />
 
       </Drawer.Navigator>

@@ -14,7 +14,9 @@ const CategoriesMeal = ({ route, navigation }) => {
       if (findCategoryById) {
          navigation.setOptions({
             title: findCategoryById.title,
-            headerRight: CustomHeader
+            headerRight: () => (
+               <CustomHeader navigation={navigation} />
+            ),
          });
       }
    }, [findCategoryById]);
