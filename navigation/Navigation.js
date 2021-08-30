@@ -76,7 +76,7 @@ function MealsNavigation() {
                      tabBarIcon: () => (
                         <Ionicons name="star-outline" size={25} color="black" />
                      ),
-                     headerShown: false,
+                     headerTitle: 'Your Favorite'
                   }} />
             </Tab.Navigator>
          </OverflowMenuProvider>
