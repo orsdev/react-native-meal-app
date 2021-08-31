@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, Switch, Platform } from 'react-native';
 import {
    Item
 } from 'react-navigation-header-buttons';
+import { useDispatch } from 'react-redux';
 
 import CustomHeader from '../components/CustomHeader';
 
 import Colors from '../constants/Colors';
+import { setFilters } from '../redux/actions/meals.action';
 
 const FilterSwitch = props => {
    return (
@@ -25,6 +27,8 @@ const FilterSwitch = props => {
 const FiltersScreen = props => {
    const { navigation, route } = props;
 
+   const dispatch = useDispatch();
+
    const [isGlutenFree, setIsGlutenFree] = useState(false);
    const [isLactoseFree, setIsLactoseFree] = useState(false);
    const [isVegan, setIsVegan] = useState(false);
@@ -35,13 +39,11 @@ const FiltersScreen = props => {
          glutenFree: isGlutenFree,
          lactoseFree: isLactoseFree,
          vegan: isVegan,
-         isVegetarian: isVegetarian
+         vegetarian: isVegetarian
       };
-   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian]);
 
-   useEffect(() => {
-      navigation.setParams({ save: saveFilters });
-   }, [saveFilters]);
+      dispatch(setFilters(appliedFilters));
+   }, [isGlutenFree, isLactoseFree, isVegan, isVegetarian, dispatch]);
 
    React.useLayoutEffect(() => {
       navigation.setOptions({
@@ -50,9 +52,6 @@ const FiltersScreen = props => {
                <Item
                   title="Save"
                   iconName="save"
-                  onPress={() => {
-                     console.log(route.params.save())
-                  }}
                />
             </CustomHeader>
          ),
