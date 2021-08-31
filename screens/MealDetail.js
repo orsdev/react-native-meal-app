@@ -22,24 +22,29 @@ const ListItem = props => {
 const MealDetails = ({ route, navigation }) => {
    const { mealId } = route.params;
    const availableMeals = useSelector(state => state.meals.meals);
+   const favMeals = useSelector(state => state.meals.favoriteMeals);
    const dispatch = useDispatch();
 
    const findMealById = availableMeals.find(({ id }) => mealId === id);
+   const isFav = favMeals.some(({ id }) => mealId === id);
+
 
    React.useEffect(() => {
+
       if (findMealById) {
          navigation.setOptions({
             headerRight: () => (
                <CustomHeader navigation={navigation} >
                   <Item
                      title="Favorite"
-                     iconName="star-outline"
+                     iconName={isFav ? "star" : "star-outline"}
                      onPress={() => dispatch(toggleFavorite(mealId))} />
                </CustomHeader>
             ),
          });
       }
-   }, [findMealById]);
+   }, [findMealById, isFav]);
+
 
    React.useEffect(() => {
       if (findMealById) {
